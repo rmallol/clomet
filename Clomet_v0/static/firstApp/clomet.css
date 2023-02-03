@@ -1,0 +1,158 @@
+
+/* Style the header with a grey background and some padding */
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right;
+}
+
+/* ----------------------------------------------------------------------------------- */
+
+main {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+
+}
+
+.source {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+}
+
+.source a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.source a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.source a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.formurl {
+  width: 100%;
+  flex-direction: column;
+  /*justify-content: space-between;*/
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.fieldseturl {
+  text-align: center;
+  width: 80%;
+}
+
+
+.divurl {
+  width: 100%;
+  flex-direction: row;
+  /*justify-content: space-between;*/
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.buturl {
+  background-color: #f1f1f1;
+  padding: 14px 28px;
+  margin: 2px 1px;
+  cursor: pointer;
+}
+
+.buturl:hover {
+  background-color: #ddd;
+}
+
+
+.fieldsetabc {
+  text-align: center;
+  width: 80%;
+}
+
+
+
+
+/* ----------------------------------------------------------------------------------- */
+
+.footer {
+  width: fit-content;
+}
+
+.footerdiv {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+footer {
+  background-color: #f1f1f1;
+  position: relative;
+  padding: 20px 10% 10px 10%;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 550px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+  .footer {
+    padding: 5px 0% 5px 0%;
+    font-size: 85%;
+  }
+}

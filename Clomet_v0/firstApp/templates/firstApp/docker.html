@@ -1,0 +1,34 @@
+{% extends "firstApp/base.html" %}
+
+{% block content %}
+
+<div style="width: 100%; flex-direction: column; justify-content: center; align-items: center; display: flex;">
+    
+    
+    <div class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        
+        <h1>CloMet Docker Image</h1>
+
+        <div style="text-align: left;">
+
+            <p> CloMet can be downloaded locally as a Docker image with some simple steps: </p>
+    
+            <p>0. Download Docker from <a href="https://docs.docker.com/desktop/windows/install/" target="_blank"> this website</a> and follow the tutorial in order to install it.</p>
+    
+            <p>1. Open a terminal where you want to download the CloMet Docker image.</p>
+    
+            <p>2. Run the command: docker run --rm -it -p 8000:8000 rogermallol/clomet:latest </p>
+            
+            <p>You can change the port number 8000 to any unused port in the docker environment.</p>
+    
+            <p>3. Once the download has finished, open localhost on port 8000 (type localhost:8000 on the browser search bar).</p>
+
+            <p>4. To close the application, type CONTROL-C</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

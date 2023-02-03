@@ -1,0 +1,429 @@
+
+{% extends "firstApp/base.html" %}
+
+{% block content %}
+
+<form class="formurl" style="padding: 20px 00px;" method="post" enctype="multipart/form-data" autocomplete="off" id="localform" >
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+      <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Upload from local</legend>
+      <div class ="divurl">
+        <label for="url" style="width: 20%; padding: 10px 10px; font-size: 17px; font-family: Courier New;">Select study: </label>
+        <input style="width: 40%; padding: 10px 10px; font-family: Courier New; font-size: 17px; background-color: #eeeeee;" type="file" class="fieldseturl" id="localdata" name="localdata" size="200" >
+        <div style="width: 29%;">
+          <input id="localBtn" class="buturl" style="padding: 10px 10px; margin: 3px 2px; font-family: Courier New; font-size: 17px;" type="submit" name="submit" value="Load">
+        </div>
+      </div>  
+    </fieldset>
+</form>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 id="modal-title">ERROR: invalid ID</h4>
+          <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="modal-text">Some text in the Modal Body</p>
+      </div>
+      <!--<div class="modal-footer">
+        <h3>Modal Footer</h3>
+      </div>-->
+    </div>
+  
+</div>
+
+<form class="formurl" method="post" autocomplete="off" id="downloadDatasetform" style="display: none; padding: 20px 00px;">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Dataset download (W4M Galaxy) </legend>
+        <div class ="divurl" style="flex-direction: flex-end; " id="downloaddiv">
+        
+        </div>  
+    </fieldset>
+</form>
+
+<form class="formurl" method="post" autocomplete="off" id="procnoinfo" style="display: none; padding: 20px 00px;">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Select PULPROG</legend>
+        <div class ="divurl">
+        <label for="urldata" style="width: 20%; padding: 10px 10px; font-size: 17px; font-family: Courier New;">Study PULPROG: </label>
+        <input id="procnoinput" list="procnodata" name="urldata" placeholder="--Please choose an option--" style="width: 40%; padding: 10px 10px; font-family: Courier New; font-size: 17px; text-align: center;">
+        <datalist id="procnodata">
+
+        </datalist>
+        <div style="width: 29%;">
+            <input class="buturl" style="padding: 10px 10px; margin: 3px 2px; font-family: Courier New; font-size: 17px;" type="submit" value="Import data">
+        </div>
+        </div>  
+    </fieldset>
+</form>
+
+<form class="formurl" method="post" autocomplete="off" id="dataimportform" style="display: none; padding: 20px 00px;">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;" >
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Download results</legend>
+        <div class ="divurl" id="importdiv" style="display: flex;">
+            <div id="datacsv" style="display: flex; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around; flex-direction: column;"></div>
+            <div id="datatab" style="display: flex; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around; flex-direction: column;"></div>
+            <div id="bintab" style="display: flex; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around; flex-direction: column;"></div>
+        </div>
+        <div class ="divurl" id="report" style="display: flex; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around; flex-direction: row;"></div>
+    </fieldset>
+</form>
+
+<form id="downloaddataform" class="formurl" method="post" autocomplete="off" style="display: none; padding: 20px 00px;">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;" >
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Essential data</legend>
+
+        <table style="border: 3px solid black; border-collapse: collapse; width: 100%; text-align: center;">
+            <tr style="border: 1px solid black;">
+                <td style="border: 1px solid black; padding: 10px 0px;">Data type / <br> Output platform</td>
+                <th style="border: 1px solid black; padding: 10px 0px;">MetaboAnalyst</th>
+                <th style="border: 1px solid black; padding: 10px 0px;">Workflow4Metabolomics</th>
+            </tr>
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black; padding: 10px 0px;">RAW data</th>
+                <td id="RawMA" style="border: 1px solid black; padding: 10px 0px"></td>
+                <td id="RawW4M" style="border: 1px solid black; padding: 10px 0px"></td>
+            </tr>
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black; padding: 10px 0px;">Binning data</th>
+                <td id="BinMA" style="border: 1px solid black; padding: 10px 0px;"></td>
+                <td id="BinW4M" style="border: 1px solid black; padding: 10px 0px;"></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+<form id="extradataform" class="formurl" method="post" autocomplete="off" style="display: none; padding: 20px 00px;">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;" >
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Additional data</legend>
+
+        <p style="text-align: left;">You may also find the following files interesting...</p> <br>
+
+        <div class ="divurl" style="flex-direction: flex-end; " id="extradiv">
+            
+        </div>
+
+    </fieldset>
+</form>
+
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    /*
+        On submiting the form, send the POST ajax
+        request to server and after successfull submission
+        display the object.
+    */
+
+    $("#localform").submit(function (e) {
+
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        //var serializedData = $(this).serialize();
+
+        var serializedData = new FormData($('#localform').get(0));
+
+        $("#procnodata").empty();
+        $("#procnoinfo").trigger('reset');
+        $("#procnoinfo").hide();
+
+        $("#dataimportform").hide();
+        $("#downloaddataform").hide();
+        $("#extradataform").hide();
+
+        $("#downloaddiv").empty();
+        $("#downloadDatasetform").hide();
+        $("#extradiv").empty();
+        $("#BinMA").empty();
+        $("#BinW4M").empty();
+        $("#RawMA").empty();
+        $("#RawW4M").empty();
+
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            cache: false,
+            url: "{% url 'procnolocal' %}",
+            enctype: 'multipart/form-data',
+            data: serializedData,
+            success: function (response) {
+                // 1. clear the form.
+                //$("#urlform").trigger('reset');
+                // 2. focus to nickname input 
+                $("#id_nick_name").focus();
+
+                $("#procnodata").empty();
+                $("#procnoinfo").trigger('reset');
+
+                $("#dataimportform").hide();
+                $("#downloaddataform").hide();
+                $("#extradataform").hide();
+
+                $("#downloaddiv").empty();
+                $("#downloadDatasetform").hide();
+                $("#extradiv").empty();
+                $("#BinMA").empty();
+                $("#BinW4M").empty();
+                $("#RawMA").empty();
+                $("#RawW4M").empty();
+
+                var instance = response["instance"];
+
+                for (let i in instance) {
+                    myform = document.getElementById('procnodata')
+                    newOption = document.createElement('option');
+                    newOption.value = instance[i];
+                    newOption.innerText = instance[i];
+                    myform.appendChild(newOption);
+                }
+
+                $("#procnoinfo").show();
+
+                var instance = response["links"];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#downloaddiv").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 20px 20px; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }
+                //$("#downloadDatasetform").show();
+                
+            },
+            error: function (response) {
+
+                popup(response["responseJSON"]["error"]["errors"]["title"],
+                    response["responseJSON"]["error"]["errors"]["message"]);
+                
+                $("#procnodata").empty();
+                $("#procnoinfo").trigger('reset');
+                $("#procnoinfo").hide();
+
+                //$("#importdiv").empty();
+                $("#dataimportform").hide();
+                $("#downloaddataform").hide();
+                $("#extradataform").hide();
+
+                $("#downloaddiv").empty();
+                $("#downloadDatasetform").hide();
+                $("#extradiv").empty();
+                $("#BinMA").empty();
+                $("#BinW4M").empty();
+                $("#RawMA").empty();
+                $("#RawW4M").empty();
+
+                // alert the error if any error occured
+                // alert("Please, insert a valid ID")
+            }
+        })
+    })
+
+    $("#procnoinfo").submit(function (e) {
+
+
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        //$("#importdiv").empty();
+        $("#dataimportform").hide();
+        // make POST ajax call
+
+        txtid = document.getElementById("localdata");
+        serializedData = serializedData + "&id=" + txtid.value;
+
+        $("#datacsv").empty();
+        $("#datatab").empty();
+        $("#bintab").empty();
+        $("#report").empty();
+        $("#extradiv").empty();
+        $("#BinMA").empty();
+        $("#BinW4M").empty();
+        $("#RawMA").empty();
+        $("#RawW4M").empty();
+
+        $("#dataimportform").hide();
+        $("#downloaddataform").hide();
+        $("#extradataform").hide();
+
+        //alert(serializedData);
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'dataimportlocal' %}",
+            data: serializedData,
+            success: function (response) {
+                // 1. clear the form.
+                // $("#urlform").trigger('reset');
+                // 2. focus to nickname input 
+                $("#id_nick_name").focus();
+
+                //$("#importdiv").empty();
+
+                $("#datacsv").empty();
+                $("#datatab").empty();
+                $("#bintab").empty();
+                $("#report").empty();
+
+                var instance = response["values"][0];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#datacsv").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; width: 100%;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }
+
+                var instance = response["values"][1];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#datatab").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; width: 100%;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }
+
+                var instance = response["values"][2];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#bintab").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; width: 100%;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }
+
+                var instance = response["values"][3];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#report").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; width: 100%; height: 3em; display: flex; justify-content: center; align-items: flex-end;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }
+
+                //$("#dataimportform").show();
+
+                $("#BinMA").empty();
+                $("#BinW4M").empty();
+                $("#RawMA").empty();
+                $("#RawW4M").empty();
+
+                var instance = response["tabledata"];
+
+                $("#RawMA").append (
+                    `<a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ instance[0][1] } download> ${ instance[0][0] } </a>`
+                )
+                $("#RawW4M").append (
+                    `<a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ instance[2][1] } download> ${ instance[2][0] } </a>`
+                )
+                $("#BinMA").append (
+                    `<a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ instance[1][1] } download> ${ instance[1][0] } </a>`
+                )
+                $("#BinW4M").append (
+                    `<a style="background-color: #f1f1f1; text-decoration: none; font-family: Courier New; font-size: 17px;" href=${ instance[3][1] } download> ${ instance[3][0] } </a>`
+                )
+
+                $("#downloaddataform").show();
+
+                $("#extradiv").empty();
+
+                var instance = response["extras"];
+
+                for (let i in instance) {
+
+                    name = instance[i][0]
+                    urlname = instance[i][1]
+
+                    $("#extradiv").append (
+                        `<div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                            <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 20px 20px; font-family: Courier New; font-size: 17px;" href=${ urlname } download> ${ name } </a>
+                        </div>`
+                    )
+                }   
+
+                $("#extradataform").show();
+
+            },
+            error: function (response) {
+
+                //$("#importdiv").empty();
+                $("#dataimportform").hide();
+                $("#downloaddataform").hide();
+                $("#extradataform").hide();
+
+                // alert the error if any error occured
+                //alert("Please, insert a valid PULPROG")
+
+                popup(response["responseJSON"]["error"]["errors"]["title"],
+                    response["responseJSON"]["error"]["errors"]["message"]);
+            }
+        })
+    })
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function popup(maintitle, message) {
+        var modal = document.getElementById("myModal");
+        var body = document.getElementById("modal-text");
+        var title = document.getElementById("modal-title");
+        body.innerHTML = message
+        title.innerHTML = maintitle
+        modal.style.display = "block";
+    }
+
+</script>
+{% endblock javascript %}

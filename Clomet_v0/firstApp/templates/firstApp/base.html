@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Clomet 2021</title>
+    <meta name="description" content="Clomet 2021 server page">
+    <meta name="keywords" content="Metabolomics, data analysis, clomet">
+    <meta name="author" content="Jordi Rodeiro">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'firstApp/onlineTool.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body style="margin: 0px; display: flex; flex-direction: column;">
+
+    <header style="background-color: white; display: flex; flex-direction: column; justify-content: center;">
+      <div style="background-color: #3c3c3b; padding: 20px 10% 20px 10%; color:white; text-align:center;">Welcome to CloMet!</div>
+      <div style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 10px 00px;">
+        <div style="display: inline-block; width: 10%;">
+          <img src="/media/LaSalleBarcelona.png" alt="La Salle Barcelona">
+        </div>
+        <div style="display: inline-block; width: 40%; ">
+          <ul style="list-style-type: none; display: table; width:100%; display: flex; flex-direction: row;">
+            <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="/firstApp/">CLOMET</a></li>
+            <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="local">LOCAL</a></li>
+            <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="docker">DOCKER</a></li>
+            <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="tutorials">TUTORIALS</a></li>
+            <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="about">ABOUT</a></li>
+            <!-- <li style="padding: 20px 3% 10px 3%; text-align:center; font-family: Courier New; font-size: 20px;"><a style="text-decoration: none; color: black;" href="tests">TESTS</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main style="background-color: white;">
+
+      <!-- <img src="media/Test1.jpg" alt="Metabolights Workflow" style="padding: 20px 00px; display: block; margin-left: auto; margin-right: auto; width: 100%; max-width: 100%; height: auto;">
+      -->
+
+    {% block content %}
+    {% endblock content %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {% block javascript %}
+    {% endblock javascript %}
+
+
+    </main>
+
+    <footer style="padding: 30px 0px 0px 0px; background-color: white; margin-top: auto;">
+        <div class="footerdiv" style="background-color: #2d2d2b; padding: 20px 00px;">
+          <div class="footer">La Salle Campus Barcelona</div>
+          <div class="footer">Universitat Ramon Llull</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

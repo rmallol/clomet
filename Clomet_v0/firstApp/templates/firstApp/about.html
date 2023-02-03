@@ -1,0 +1,106 @@
+{% extends "firstApp/base.html" %}
+
+{% block content %}
+
+
+<div style="width: 100%; flex-direction: column; justify-content: center; align-items: center; display: flex;">
+    <div class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+
+        <h1>CloMet</h1>
+
+        <h4>A novel cloud-based platform that connects established metabolomics data repositories and data analysis platforms.</h4>
+
+    </div>
+
+</div>
+
+
+<form class="formurl" style="padding: 20px 00px;" method="post" autocomplete="off" id="urlform">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New; display: flex;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">What is CloMet?</legend>
+        
+        <p style="text-align: left;">
+            CloMet is an open-source modular software platform that contributes to standardization, 
+            reusability and reproducibility in the metabolomics field. CloMet translates and processes raw and 
+            NMR-based metabolomics data from Workflow4Metabolomics and MetaboAnalyst to a file format that can be used by either 
+            Workflows4Metabolomics or MetaboAnalyst. <br><br>
+            We validated both our platform and the output data using data sets from these repositories as well as 
+            using locally stored data sets, being a Docker file available 
+            for the latter use case. Overall, CloMet fills the gap between well-established data repositories and 
+            web-based statistical platforms, and contributes to the consolidation of a data-driven perspective of 
+            the metabolomics field by leveraging and connecting existing data and resources.
+        </p>
+
+    </fieldset>
+</form>
+
+<form class="formurl" style="padding: 20px 00px;" method="post" autocomplete="off" id="urlform">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New; display: flex;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Who are we?</legend>
+        
+        <div class="card" style="flex-direction: column">
+            <img src="media/ProfilePictures/RogerMallol.jpg" alt="Roger Mallol" style="width: 100%">
+            <h1 style="font-size: xx-large;">Roger Mallol, PhD</h1>
+            <p class="title">Lecturer and Researcher</p>
+            <p>La Salle - Universitat Ramon Llull</p>
+            <p>roger.mallol@salle.url.edu</p>
+            <div style="margin: 10px 0;">
+                <a style="margin: 0 20px;" href="https://twitter.com/RogerMallol" target="_blank"><i class="fa fa-twitter"></i></a>  
+                <a style="margin: 0 20px;" href="https://www.linkedin.com/in/rogermallol/" target="_blank"><i class="fa fa-linkedin"></i></a>  
+            </div>
+        </div>
+
+        <div class="card" style="flex-direction: column">
+            <img src="media/ProfilePictures/JoanNavarro.jpg" alt="Joan Navarro" style="width: 100%">
+            <h1 style="font-size: xx-large;">Joan Navarro, PhD</h1>
+            <p class="title">Lecturer and Researcher</p>
+            <p>La Salle - Universitat Ramon Llull</p>
+            <p>joan.navarro@salle.url.edu</p>
+            <div style="margin: 10px 0;">
+                <a style="margin: 0 20px;" href="https://twitter.com/_navarrito" target="_blank"><i class="fa fa-twitter"></i></a>  
+                <a style="margin: 0 20px;" href="https://www.linkedin.com/in/joan-navarro-phd/" target="_blank"><i class="fa fa-linkedin"></i></a>  
+            </div>
+        </div>
+
+        <div class="card" style="flex-direction: column">
+            <img src="media/ProfilePictures/JordiRodeiro.jpg" alt="Jordi Rodeiro" style="width: 100%">
+            <h1 style="font-size: xx-large;">Jordi Rodeiro</h1>
+            <p class="title">Computer Engineering student</p>
+            <p>La Salle - Universitat Ramon Llull</p>
+            <p>jordi.rodeiro@students.salle.url.edu</p>
+            <div style="margin: 10px 0;">
+                <a style="margin: 0 20px;" href="https://twitter.com/Jordirodeiro" target="_blank"><i class="fa fa-twitter"></i></a>  
+                <a style="margin: 0 20px;" href="https://www.linkedin.com/in/jordi-rodeiro" target="_blank"><i class="fa fa-linkedin"></i></a>  
+            </div>
+        </div>
+       <div class="card" style="flex-direction: column">
+            <img src="media/ProfilePictures/EsterVidana.jpg" alt="Ester Vidaña" style="width: 100%">
+            <h1 style="font-size: xx-large;">Ester Vidaña, PhD</h1>
+            <p class="title">Lecturer and Researcher</p>
+            <p>La Salle - Universitat Ramon Llull</p>
+            <p>ester.vidana@salle.url.edu</p>
+            <div style="margin: 10px 0;">
+                <a style="margin: 0 20px;" href="https://twitter.com/estervidana" target="_blank"><i class="fa fa-twitter"></i></a>  
+                <a style="margin: 0 20px;" href="https://www.linkedin.com/in/estervidana" target="_blank"><i class="fa fa-linkedin"></i></a>  
+            </div>
+        </div>
+
+
+    </fieldset>
+</form>
+
+<form class="formurl" style="padding: 20px 00px;" method="post" autocomplete="off" id="urlform">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New; display: flex;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Citing clomet</legend>
+        
+        <p style="text-align: left;">Rodeiro Jordi, Mallol Roger, Navarro Joan. 
+            CloMet: A novel cloud-based platform that connects 
+            established metabolomics data repositories and data analysis platforms.</p>
+
+    </fieldset>
+</form>
+
+{% endblock content %}

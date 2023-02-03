@@ -1,0 +1,173 @@
+{% extends "firstApp/base.html" %}
+
+{% block content %}
+
+<div style="width: 100%; flex-direction: column; justify-content: center; align-items: center; display: flex;">
+    <div class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+
+        <h1>CloMet tutorials</h1>
+
+        <p>
+            CloMet is a tool that downloads datasets from Metabolights(ML) and reformats them so that they can be used in MetaboAnalyst(MA) and 
+            Workflow4Metabolomics(W4M). In the following section, there are examples of the data that can be downloaded from CloMet and explanations
+            on how can these data be imported in MA and W4M.
+        </p>
+
+    </div>
+
+</div>
+
+<br>
+
+<form class="formurl" method="post" autocomplete="off">
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Study data download</legend>
+
+        <p>
+            The following video explains how to download any
+            <a href="https://www.ebi.ac.uk/metabolights/index" target="_blank">Metabolights</a> or
+            <a href="https://www.metabolomicsworkbench.org/data/DRCCStudySummary.php?Mode=StudySummary" target="_blank">Metabolomics Workbench</a>
+            study from the study ID.
+        </p>
+
+        <video width="400" controls loop muted>
+            <source src="/media/Tutorials/StudyDataDownload.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <br>
+        
+    </fieldset>
+</form>
+
+<br>
+
+<form class="formurl" method="post" autocomplete="off" id="dataimportform" >
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">MetaboAnalyst data</legend>
+
+        <p>
+            The following video explains how to load
+            <a href="https://www.ebi.ac.uk/metabolights/index" target="_blank">Metabolights</a> studies to 
+            <a href="https://www.metaboanalyst.ca/MetaboAnalyst/upload/StatUploadView.xhtml" target="_blank">MetaboAnalyst</a>.
+        </p>
+
+        <video width="400" controls loop muted>
+            <source src="/media/Tutorials/MetaboAnalyst.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <br> <br>
+
+        <p>
+            The following csv files are presented to be able to perform the same analysis as in the tutorial:
+        </p>
+
+        <div class ="divurl" style="flex-direction: flex-end; " id="importdiv">
+        
+            {% for ma in mas %}
+                <div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                    <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 5px 5px; font-family: Courier New; font-size: 17px;" href={{ ma.1 }} download> {{ ma.0 }} </a>
+                </div>
+            {% endfor %}
+        
+        </div>
+        
+    </fieldset>
+</form>
+
+<br>
+
+<form class="formurl" method="post" autocomplete="off" id="dataimportform" >
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">W4M data</legend>
+
+        <p>
+            The following video explains how to load
+            <a href="https://www.ebi.ac.uk/metabolights/index" target="_blank">Metabolights</a> studies to 
+            Workflow4Metabolomics <a href="https://usegalaxy.eu/" target="_blank">here</a> and
+            <a href="https://workflow4metabolomics.usegalaxy.fr/" target="_blank">here</a> when zip files are required.
+            That is functions like NMR_Read, NMR_Bucketing and NMR_SpectraAlignment.
+        </p>
+
+        <video width="400" controls loop muted>
+            <source src="/media/Tutorials/W4M_Read_v2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <br><br>
+
+        <p>
+            The following zip files are presented to be able to perform the same analysis as in the tutorial:
+        </p>
+            
+        <div class ="divurl" style="flex-direction: flex-end; " id="importdiv">
+        
+            {% for dataset in datasets %}
+                <div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                    <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 5px 5px; font-family: Courier New; font-size: 17px;" href={{ dataset.1 }} download> {{ dataset.0 }} </a>
+                </div>
+            {% endfor %}
+        
+        </div>
+
+        <br>
+
+        <p>
+            There are other functionalities like NMR_DataProcessing, and NMR_Normalization and even Multivariate analysis tools
+             that require several tabular files, that should be used as follows:
+        </p>
+
+        <video width="400" controls loop muted>
+            <source src="/media/Tutorials/W4M_Multivariate_v2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p>
+            The following zip files are presented to be able to perform the same analysis as in the tutorial:
+        </p>
+        
+        <br>
+
+        <div class ="divurl" style="flex-direction: flex-end; " id="importdiv">
+        
+            {% for w4m in w4ms %}
+                <div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                    <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 5px 5px; font-family: Courier New; font-size: 17px;" href={{ w4m.1 }} download> {{ w4m.0 }} </a>
+                </div>
+            {% endfor %}
+        
+        </div>
+
+    </fieldset>
+</form>
+
+<br>
+
+<form class="formurl" method="post" autocomplete="off" id="dataimportform" >
+    {% csrf_token %}
+    <fieldset class="fieldseturl" style="padding: 40px 10px; width: 65%; font-family: Courier New;">
+        <legend style="background-color: #5a888d; color: white; padding: 13px 20px; text-align: left; font-size: 18px;">Raw data</legend>
+
+        <p>
+            Raw data .csv files are presented in this section. These can be used for further analysis, since they have
+            not been under any data treatment.
+        </p>
+            
+        <div class ="divurl" style="flex-direction: flex-end; " id="importdiv">
+        
+            {% for raw in rawdata %}
+                <div style="flex-direction: row; gap: 40px 20px; height: fit-content; width: 100%; justify-content: space-around;">
+                    <a style="background-color: #f1f1f1; text-decoration: none; padding: 20px 20px; margin: 5px 5px; font-family: Courier New; font-size: 17px;" href={{ raw.1 }} download> {{ raw.0 }} </a>
+                </div>
+            {% endfor %}
+        
+        </div>  
+        
+    </fieldset>
+</form>
+
+{% endblock content %}
