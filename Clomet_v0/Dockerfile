@@ -1,3 +1,8 @@
+# build docker (inside Clomet_v0 folder): docker build -t clomet_v0 .
+# run docker container: docker run -it -p 8000:8000 clomet_v0
+# delete docker container: docker rmi -f clomet_v0
+
+
 FROM python:3.8 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
