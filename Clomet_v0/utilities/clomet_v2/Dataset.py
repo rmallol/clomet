@@ -240,7 +240,6 @@ class Dataset:
         self.errormanager.addData("Chosen pulprog: " + procno['name'])
         self.errormanager.addData("Number of samples: " + str(len(A)))
         self.errormanager.addData("Initial size: " + str(len(A[basedir]["XAxis"])))
-        print("*****************************ESTER HERE")
         A = self.metaboanalyst.prepareMetaboAnalyst(A, "XAxis", "Data", 'MAAxis', 'MAData')
 
         A = self.bindata.applyBinning(A, "XAxis", "Data")
